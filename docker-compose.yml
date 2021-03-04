@@ -5,7 +5,10 @@ services:
         build:
             context: .
         environment:
-          - HTTP=true
+          - PORT=8443
+          - HTTP=false
+          - HTTP_TLS_KEY=key.pem
+          - HTTP_TLS_CERTIFICATE=cert.pem
         ports:
-          - 8442:8443
+          - 8443:8443
         restart: unless-stopped
