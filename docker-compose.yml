@@ -1,0 +1,11 @@
+version: '3.3'
+services:
+    monopoly-game:
+        container_name: monopoly-game
+        build:
+            context: .
+        environment:
+          - HTTP=true
+        ports:
+          - 8442:8443
+        restart: unless-stopped
