@@ -10,7 +10,7 @@ export default class SuperTax extends React.Component{
             <div className="icon">
                 <FontAwesomeIcon icon={faHandHoldingUsd} />
             </div>
-            <div className="price">Pay $200</div>
+            <div className="price">Paga $200</div>
         </div>);
     }
 }

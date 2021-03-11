@@ -27,7 +27,7 @@ export class RTC {
         if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
             navigator.mediaDevices.getUserMedia(constraints).then(this.getUserMediaSuccess).catch(this.errorHandler);
         } else {
-            alert('Il tuo browser non supporta getUserMedia API');
+            alert('Il tuo browser non supporta getUserMedia API oppure hai effettuato un accesso con HTTP e non HTTPS');
         }
 
     }

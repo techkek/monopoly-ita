@@ -650,7 +650,8 @@ class GameService {
                         "AUGURI! È IL TUO COMPLEANNO! Gli altri giocatori devono darti $10 o una proprietà. A loro la scelta",
                         "Premio di anzianità: $100",
                         "Ti sei accorto di avere una azione su una società e la ritiri: $50. Ma davvero te ne accorgi solo ora?",
-                        "Doctor's fees. Pay $50"
+                        "Tasse del dottore! Paghi 50$.",
+                        "Vai a Via della Vittoria, ma solo se ci sono case o alberghi."
                     ]),
                     used: [],
                 },
@@ -670,7 +671,8 @@ class GameService {
                         "Vai alla prossima società, e se è di qualcun altro tira il dado, e buona fortuna.",
                         "Ad un vandalo stanno antipatiche le tue case e i tuoi alberghi: paga 25$ per ogni casa e 100$ per ogni albergo per sistemarle",
                         "Vai indietro di tre spazi se il giorno del mese è pari, altrimenti torna indietro di 7.",
-                        "Vai vicino ai carcerati e ai laureati in Via Accademia. Se passi dal via, prendi $200."
+                        "Vai vicino ai carcerati e ai laureati in Via Accademia. Se passi dal via, prendi $200.",
+                        "Hai scommesso 100 con la banca 100$ nel caso in cui qualcuno entro due turni passi sul Via. Se vinci, vinci 200$, se perdi perdi 100$."
                     ]),
                     used: []
 
@@ -936,7 +938,7 @@ class GameService {
             this.sendLog(player.name + " added one hotel to " + title);
             this.sendLog("Bank balance: Houses: " + bank.housing.houses + ", Hotels: " + bank.housing.hotels);
         } else {
-            this.sendLog("No more hotels in the bank");
+            this.sendLog("Non ci sono più hotel nella banca.");
         }
 
     }
@@ -947,24 +949,24 @@ class GameService {
         let bank = this.game.players.find(p => p.id == 1);
         const availableHotels = bank.housing.hotels;
         if (!this.canBuyHouse(street, player)) {
-            this.sendLog(player.name + " is not allowed to add houses to " + street.title);
+            this.sendLog(player.name + " non ha il permesso di costruire case su " + street.title);
             return;
         }
 
         if (player.id != street.owner) {
-            this.sendLog(player.name + " is not the owner of " + street.title);
+            this.sendLog(player.name + " non è il proprietario di " + street.title);
             return;
         }
 
         if (street.hotel === 0) {
-            this.sendLog(street.title + " as no more hotel to remove");
+            this.sendLog(street.title + " non ha più hotel da rimuovere");
             return;
         }
 
         street.hotel--;
         bank.housing.hotels++;
-        this.sendLog(player.name + " removed one hotel from " + title);
-        this.sendLog("Bank balance: Houses: " + bank.housing.houses + ", Hotels: " + bank.housing.hotels);
+        this.sendLog(player.name + " ha tolto un hotel da " + title);
+        this.sendLog("Bilancio della banca: Case: " + bank.housing.houses + ", Hotel: " + bank.housing.hotels);
 
     }
 
@@ -990,10 +992,10 @@ class GameService {
 
             this.game.deeds[type].sort((s1, s2) => s2.position - s1.position);
 
-            this.sendLog(this.getPlayerFromId(from).name + " transferred " + title + " from " + owner.name + " to " + toUser.name);
+            this.sendLog(this.getPlayerFromId(from).name + " traferito " + title + " da " + owner.name + " a " + toUser.name);
 
         } else {
-            this.sendLog(title + " can't be sent to its current owner");
+            this.sendLog(title + " non può essere inviata al corrente proprietario");
         }
     }
 
@@ -1063,8 +1065,8 @@ class GameService {
 
         const logLine = fromPlayer.name + " sent $" + sum + " to " + toPlayer.name;
         this.sendLog(logLine);
-        this.sendLog(fromPlayer.name + " new balance: $" + fromNewSum);
-        this.sendLog(toPlayer.name + " new balance: $" + toNewSum);
+        this.sendLog(" nuovo bilancio di" + fromPlayer.name + ': $' + fromNewSum);
+        this.sendLog(" nuovo bilancio di" + toPlayer.name + ': $' + toNewSum);
     }
 
     randomInt = (max) => {
@@ -1110,7 +1112,7 @@ class GameService {
         if (times === 0) {
             this.game.rollingDice = true;
             this.sendToWs();
-            this.sendLog(player + ' rolled the dice !');
+            this.sendLog(player + ' ha tirato il dado!');
         }
 
         this.game.dice[0] = this.randomInt(6) + 1;

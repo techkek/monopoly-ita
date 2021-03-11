@@ -66,9 +66,9 @@ export default class Settings extends React.Component {
         return (<div className="game-settings">
             <FontAwesomeIcon icon={faCog} onClick={e => this.setState({showSettings: !this.state.showSettings})}/>
             {this.state.showSettings && <ul>
-                <li onClick={this.saveGame}>Save game</li>
-                <li onClick={this.loadGame}>Load game</li>
-                <li onClick={this.props.showHelp}>Show help dialog</li>
+                <li onClick={this.saveGame}>Salva il gioco</li>
+                <li onClick={this.loadGame}>Carica un salvataggio</li>
+                <li onClick={this.props.showHelp}>Aiuto</li>
             </ul>
             }
         </div>);
